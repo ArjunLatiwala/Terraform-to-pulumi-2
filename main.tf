@@ -12,6 +12,8 @@ resource "aws_s3_bucket_ownership_controls" "example" {
 }
 
 resource "aws_s3_bucket_public_access_block" "example" {
+
+
   bucket = aws_s3_bucket.mybucket.id
 
   block_public_acls       = false
@@ -31,6 +33,9 @@ resource "aws_s3_bucket_acl" "example" {
 }
 
 resource "aws_s3_object" "index" {
+    depends_on = [
+    aws_s3_bucket_acl.example
+  ]
   bucket = aws_s3_bucket.mybucket.id
   key = "index.html"
   source = "index.html"
@@ -39,6 +44,9 @@ resource "aws_s3_object" "index" {
 }
 
 resource "aws_s3_object" "error" {
+    depends_on = [
+    aws_s3_bucket_acl.example
+  ]
   bucket = aws_s3_bucket.mybucket.id
   key = "error.html"
   source = "error.html"
@@ -47,6 +55,9 @@ resource "aws_s3_object" "error" {
 }
 
 resource "aws_s3_object" "profile" {
+    depends_on = [
+    aws_s3_bucket_acl.example
+  ]
   bucket = aws_s3_bucket.mybucket.id
   key = "profile.png"
   source = "profile.png"

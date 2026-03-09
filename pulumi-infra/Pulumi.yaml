@@ -1,0 +1,5 @@
+name: simple-terraform-project
+runtime: python
+config:
+  aws:region:
+    value: us-east-1
